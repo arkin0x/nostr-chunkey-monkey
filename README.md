@@ -29,7 +29,8 @@ const customTags = [
   ["monkey", "🐒🍌"],
 ]
 
-// optional hex event id to attach the chunks to
+// Optional hex event id to attach the chunks to.
+// This makes the attached event a magnet for querying chunks when the chunked file hash isn't known: Filter { kinds: 5391, #e <attached> }
 const attachToEvent = "0fbc395a..." 
 
 const allChunks = []
