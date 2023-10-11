@@ -71,7 +71,9 @@ export async function publish<ChunkeyMonkeyPublishOptions>({ndk, file, tags, att
           ndkEvent.tags.push(...tags)
         }
         ndkEvent.tags.push(['m', mime])
-        ndkEvent.tags.push(['alt', description])
+        if (description) {
+          ndkEvent.tags.push(['alt', description])
+        }
         ndkEvent.tags.push(['index', index.toString()])
         ndkEvent.tags.push(['x', hash])
         await ndkEvent.publish()
