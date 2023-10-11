@@ -53,3 +53,9 @@ const reassembledFiles = reassemble(allChunks)
 console.log(reassembledFiles) // {"<mimetype>:<hash>": "plaintext file contents", ...}
 
 ```
+
+## Todo
+
+- [ ] modify index tag to support 3rd element indicating how many chunks the file has
+- [ ] add error if not all chunks are found for a file
+
