@@ -30,12 +30,6 @@ const getTag = (key: string): FindTag => {
     return tag && Array.isArray(tag) && tag[0] === key
   }
 }
-// this function requires the key and value to match
-const getTagValue = (key: string, value: string): FindTag => {
-  return (tag): boolean => {
-    return tag && Array.isArray(tag) && tag[0] === key && tag[1] === value
-  }
-}
 
 /**
  * Publish a file into chunks via monkey
@@ -46,7 +40,7 @@ const getTagValue = (key: string, value: string): FindTag => {
  * @param param4 description - an alt description of the file
  * @param param5 chunkSize - custom chunk size in bytes. Default is 100kb
  */
-export async function publish<ChunkeyMonkeyPublishOptions>({ndk, file, tags, attach, description, chunkSizeBytes}): Promise<NDKEvent[]> {
+export async function publish({ndk, file, tags, attach, description, chunkSizeBytes}: ChunkeyMonkeyPublishOptions): Promise<NDKEvent[]> {
   const published: NDKEvent[] = []
   try {
     const reader = new FileReader()
@@ -65,7 +59,7 @@ export async function publish<ChunkeyMonkeyPublishOptions>({ndk, file, tags, att
         ndkEvent.kind = BLOB
         ndkEvent.content = chunk 
         if (attach) {
-          ndkEvent.tags.push(['e', attach, ndk.explicitRelayUrls[0], "root" ])
+          ndkEvent.tags.push(['e', attach, ndk?.explicitRelayUrls ? ndk?.explicitRelayUrls[0] : "", "root" ])
         }
         if (tags) {
           ndkEvent.tags.push(...tags)
